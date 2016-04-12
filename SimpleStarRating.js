@@ -105,8 +105,13 @@ var SimpleStarRating = (function () {
         }
 
         function showCurrentRating() {
-            currentRating = parseFloat(attr('data-rating', 0));
-            showRating(currentRating);
+            var ratingAttr = parseFloat(attr('data-rating', 0));
+            if (ratingAttr) {
+                currentRating = ratingAttr;
+                showRating(currentRating);
+            } else {
+                showDefaultRating();
+            }
         }
 
         function showDefaultRating() {
