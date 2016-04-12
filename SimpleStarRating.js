@@ -26,11 +26,15 @@ SOFTWARE.
 
 var SimpleStarRating = (function () {
     function SimpleStarRating(target) {
-        var max = (target.getAttribute('data-stars') ?
-                parseInt(target.getAttribute('data-stars')) : 5),
-            disabled = false,
-            currentRating = (target.getAttribute('data-rating') ?
-                parseFloat(target.getAttribute('data-rating')) : 0),
+        function attr(name, d) {
+            var a = target.getAttribute(name);
+            return (a ? a : d);
+        }
+
+        var max = parseInt(attr('data-stars', 5)),
+            disabled = typeof target.getAttribute('disabled') != 'undefined',
+            defaultRating = parseFloat(attr('data-default-rating', 0)),
+            currentRating = -1,
             stars = [];
 
         target.style.display = 'inline-block';
@@ -62,9 +66,16 @@ var SimpleStarRating = (function () {
         function setCurrentRating(rating) {
             currentRating = rating;
             target.setAttribute('data-rating', currentRating);
+            showCurrentRating();
         }
-
         this.setCurrentRating = setCurrentRating;
+
+        function setDefaultRating(rating) {
+            defaultRating = rating;
+            target.setAttribute('data-default-rating', defaultRating);
+            showDefaultRating();
+        }
+        this.setDefaultRating = setDefaultRating;
 
         this.onrate = function (rating) {};
 
@@ -80,18 +91,27 @@ var SimpleStarRating = (function () {
                 clearRating();
         });
 
-        showCurrentRating();
+        showDefaultRating();
 
-        function showCurrentRating() {
+        function showRating(r) {
             clearRating();
-            currentRating = parseFloat(target.getAttribute('data-rating')) || 0;
             for (var i = 0; i < stars.length; i++) {
-                if (i >= currentRating)
+                if (i >= r)
                     break;
-                if (i === Math.floor(currentRating) && i !== currentRating)
+                if (i === Math.floor(r) && i !== r)
                     stars[i].classList.add('half');
                 stars[i].classList.add('active');
             }
+        }
+
+        function showCurrentRating() {
+            currentRating = parseFloat(attr('data-rating', 0));
+            showRating(currentRating);
+        }
+
+        function showDefaultRating() {
+            defaultRating = parseFloat(attr('data-default-rating', 0));
+            showRating(defaultRating);
         }
 
         function clearRating() {
