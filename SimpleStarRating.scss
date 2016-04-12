@@ -1,0 +1,46 @@
+@import 'config';
+
+.rating {
+    display: none;
+    font-size: $star-size;
+    font-weight: bold;
+    color: $filled-star-color;
+}
+
+.rating .star {
+    display: inline-block;
+    position: relative;
+    letter-spacing: 0.05em;
+}
+
+.rating .star::before {
+    display: inline-block;
+    color: $unfilled-star-color;
+    content: '☆';
+    width: 1em;
+    height: 1em;
+}
+
+.rating .star::after {
+    display: inline-block;
+    position: absolute;
+    content: '★';
+    top: 0;
+    left: 0;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    transition: all 0.1s linear;
+    overflow: hidden;
+}
+
+.rating:not([disabled]) .star:hover::after,
+.rating .star.active::after {
+    opacity: 1;
+    width: 1em;
+    height: 1em;
+}
+
+.rating .star.active.half::after {
+    width: 0.5em;
+}

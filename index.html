@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>SimpleStarRating Demo</title>
+        <meta name="author" content="Jacob Lindahl">
+        <link rel="stylesheet" href="SimpleStarRating.css">
+        <style>
+            body {
+                background-color: #999;
+                font-family: sans-serif;
+                margin: 0;
+            }
+
+            main {
+                background-color: white;
+                width: 80%;
+                margin: 0 auto;
+                padding: 50px;
+                text-align: center;
+            }
+
+            table {
+                display: inline-block;
+            }
+
+            td {
+                padding: 1em;
+            }
+
+            .golden {
+                color: #ee0;
+                background-color: #444;
+            }
+
+            .big-red {
+                color: #f11;
+                font-size: 50px;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <h1>SimpleStarRating Demo</h1>
+            <p>
+                <table>
+                    <tr>
+                        <td>Default</td>
+                        <td><span class="rating"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Golden</td>
+                        <td><span class="rating golden"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Initial Value (2.5 stars)</td>
+                        <td><span class="rating" data-rating="2.5"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Big and Red</td>
+                        <td><span class="rating big-red"></span></td>
+                    </tr>
+                    <tr>
+                        <td>10 Stars</td>
+                        <td><span class="rating" data-stars="10"></span></td>
+                    </tr>
+                </table>
+            </p>
+            <hr>
+            <br>
+            <p>
+                Click a rating, then check your console!
+            </p>
+        </main>
+        <script src="SimpleStarRating.js"></script>
+        <script>
+            var ratings = document.getElementsByClassName('rating');
+
+            for (var i = 0; i < ratings.length; i++) {
+                var r = new SimpleStarRating(ratings[i]);
+
+                ratings[i].addEventListener('rate', function(e) {
+                    console.log('Rating: ' + e.detail);
+                });
+            }
+        </script>
+    </body>
+</html>
