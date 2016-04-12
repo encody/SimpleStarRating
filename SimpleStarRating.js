@@ -24,9 +24,7 @@ SOFTWARE.
 
  */
 
-(function () {
-    window.SimpleStarRating = SimpleStarRating;
-
+var SimpleStarRating = (function () {
     function SimpleStarRating(target) {
         var max = (target.getAttribute('data-stars') ?
                 parseInt(target.getAttribute('data-stars')) : 5),
@@ -119,4 +117,6 @@ SOFTWARE.
             }
         }
     }
+
+    return SimpleStarRating;
 })();
