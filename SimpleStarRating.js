@@ -127,6 +127,8 @@ var SimpleStarRating = (function () {
         }
 
         function starClick(e) {
+            if (disabled) return;
+
             if (this === e.target) {
                 var starClicked = stars.indexOf(e.target);
                 if (starClicked !== -1) {
