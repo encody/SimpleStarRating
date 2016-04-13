@@ -31,6 +31,7 @@ SOFTWARE.
     font-size: $star-size;
     font-weight: bold;
     color: $filled-star-color;
+    white-space: nowrap;
 }
 
 .rating .star {

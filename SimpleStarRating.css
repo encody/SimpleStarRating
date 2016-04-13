@@ -28,7 +28,8 @@ SOFTWARE.
   display: none;
   font-size: 20px;
   font-weight: bold;
-  color: #3af; }
+  color: #3af;
+  white-space: nowrap; }
 
 .rating .star {
   display: inline-block;
